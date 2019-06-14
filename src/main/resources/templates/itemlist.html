@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <title>Grocery Items</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-<meta http-equiv= "Content-Type" content= "text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 </head>
 
 <body>
 
-<div class="container">
-	<div class="col-md-4">
-		<h1>Weekly Shopping List</h1>
+	<div class="container">
+		<div class="col-md-4">
+			<h1>Weekly Shopping List</h1>
+		</div>
+		<div class="col-md-4">
+			<h3 th:inline="text">Welcome
+				[[${#httpServletRequest.remoteUser}]]</h3>
+		</div>
+		<div class="col-md-4" style="padding: 20px 0">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+			</form>
+		</div>
+
+
+
+		<table class="table table-striped">
+
+			<tr>
+				<th>Item</th>
+				<th>Manufacturer</th>
+				<th>Quantity</th>
+				<th>Shop</th>
+				<th>Description/Image</th>
+				<th sec:authorize="hasAuthority('PARENT')"></th>
+				<th sec:authorize="hasAuthority('PARENT')"></th>
+
+
+			</tr>
+
+			<tr th:each="item : ${items}">
+				<td th:text="${item.name}"></td>
+				<td th:text="${item.manufacturer}"></td>
+				<td th:text="${item.quantity}"></td>
+				<td th:text="${item.shop.name}"></td>
+				<td><a class="btn btn-xs btn-success" th:href="@{/uploadfile/}">Add
+						File</a></td>
+				<td sec:authorize="hasAuthority('PARENT')"><a
+					class="btn btn-xs btn-danger"
+					th:href="@{/edit/{id}(id=${item.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('PARENT')"><a
+					class="btn btn-xs btn-danger"
+					th:href="@{/delete/{id}(id=${item.id})}">Delete</a></td>
+
+
+			</tr>
+
+
+		</table>
+		<a class="btn btn-success" href="/add">Add Item</a> <a
+			sec:authorize="hasAuthority('PARENT')" class="btn btn-danger"
+			href="/deleteall">Clear Entire List</a> <br />
+		<br /> <a class="btn btn-success" href="/files">View Attachments</a>
 	</div>
-	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
-	</div>
-	<div class="col-md-4" style="padding:20px 0">
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-		</form>
-	</div>
-   	
-
-  
-  <table class= "table table-striped">
-
-<tr>
-		    <th>Item</th>
-		    <th>Manufacturer</th>
-		    <th>Quantity</th>
-		    <th>Shop</th>
-		    <th>Description/Image</th>
-		    <th sec:authorize="hasAuthority('PARENT')"> </th>
-		    <th sec:authorize="hasAuthority('PARENT')"> </th>
-		   
-		   
-		</tr>  
-		
-<tr th:each = "item : ${items}">
-<td th:text = "${item.name}"></td>
-<td th:text = "${item.manufacturer}"></td>
-<td th:text = "${item.quantity}"></td>
-<td th:text = "${item.shop.name}"></td>
-<td><a class = "btn btn-xs btn-success"th:href="@{/uploadfile/}">Add File</a></td>
-<td sec:authorize="hasAuthority('PARENT')"><a class = "btn btn-xs btn-danger"th:href="@{/edit/{id}(id=${item.id})}">Edit</a></td>  
-<td sec:authorize="hasAuthority('PARENT')"><a class = "btn btn-xs btn-danger"th:href="@{/delete/{id}(id=${item.id})}">Delete</a></td>
-
-
-</tr>
-
-
-</table>
-<a class = "btn btn-success" href="/add">Add Item</a>
-<a sec:authorize="hasAuthority('PARENT')" class = "btn btn-danger" href="/deleteall">Clear Entire List</a>
-<br/><br/>
-<a class = "btn btn-success" href="/files">View Attachments</a>
-</div>   	
 </body>
 
 

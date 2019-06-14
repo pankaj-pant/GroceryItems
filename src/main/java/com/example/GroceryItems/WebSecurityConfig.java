@@ -1,6 +1,5 @@
 package com.example.GroceryItems;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Configuration;
@@ -12,36 +11,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 import com.example.GroceryItems.controller.UserDetailServiceImpl;
-
-
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-    private UserDetailServiceImpl userDetailsService;	
-	
-	
+	private UserDetailServiceImpl userDetailsService;
+
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-        .authorizeRequests()
-        .anyRequest().authenticated()
-        .and()
-      .formLogin()
-          .defaultSuccessUrl("/itemlist")
-          .permitAll()
-          .and()
-      .logout()
-          .permitAll();
-}
-	
-	  @Autowired
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-	    }
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/itemlist")
+				.permitAll().and().logout().permitAll();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+	}
 
 }

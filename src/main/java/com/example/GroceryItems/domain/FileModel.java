@@ -12,14 +12,16 @@ public class FileModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String fileName, mimeType;
-	
+
 	@Lob
 	private byte[] file;
-	
+
+	//Constructer
 	public FileModel() {
-		
+
 	}
 
+	//Constructer
 	public FileModel(String fileName, String mimeType, byte[] file) {
 		super();
 		this.fileName = fileName;
@@ -27,6 +29,7 @@ public class FileModel {
 		this.file = file;
 	}
 
+	//Getters and Setters
 	public long getId() {
 		return id;
 	}
@@ -58,7 +61,5 @@ public class FileModel {
 	public void setFile(byte[] file) {
 		this.file = file;
 	}
-	
-	
-	
+
 }

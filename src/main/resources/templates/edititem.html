@@ -1,40 +1,42 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Booklist</title>
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Booklist</title>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Edit item</h1>
 	<div>
-		<form th:object="${item}" th:action="@{../save}" action="#" method="post">
-		  	<input type="hidden" th:field="*{id}" class="form-control"/>
-		  	
-		  	<label for="name">Item</label>
-			<input type="text" id="name" th:field="*{name}" />
+		<form th:object="${item}" th:action="@{../save}" action="#"
+			method="post">
+			<input type="hidden" th:field="*{id}" class="form-control" /> <label
+				for="name">Item</label> <input type="text" id="name"
+				th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="manufacturer">Manufacturer</label>
-			<input type="text" id="manufacturer" th:field="*{manufacturer}" />
+			<label for="manufacturer">Manufacturer</label> <input type="text"
+				id="manufacturer" th:field="*{manufacturer}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="quantity">Quantity</label>
-			<input type="text" th:field="*{quantity}" />
+			<label for="quantity">Quantity</label> <input type="text"
+				th:field="*{quantity}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			
-			<label for="shoplist">Shop</label>
-			 <select id="shoplist" th:field="*{shop}" class="form-control">
-       			<option th:each="shop: ${shops}" th:value="${shop.id}" th:text="${shop.name}"></option>
-    		</select>
-			
-		
-		  
-			
-			
+
+			<label for="shoplist">Shop</label> <select id="shoplist"
+				th:field="*{shop}" class="form-control">
+				<option th:each="shop: ${shops}" th:value="${shop.id}"
+					th:text="${shop.name}"></option>
+			</select>
+
+
+
+
+
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	
-		  
-			
-			<input type="submit" class = "btn btn-success" value="Save"></input>
+
+
+
+			<input type="submit" class="btn btn-success" value="Save"></input>
 		</form>
 	</div>
 </body>

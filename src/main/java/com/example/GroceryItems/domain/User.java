@@ -26,9 +26,11 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
     
+    //Constructor
     public User() {
     }
 
+    //Constructor
 	public User(String username, String passwordHash, String email, String role) {
 		super();
 		this.username = username;
@@ -37,6 +39,7 @@ public class User {
 		this.role = role;
 	}
 
+	//Getters and Setters
 	public Long getId() {
 		return id;
 	}

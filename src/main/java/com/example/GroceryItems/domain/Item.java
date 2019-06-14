@@ -20,15 +20,19 @@ public class Item {
 	private String manufacturer;
 	private int quantity;
 	
+	//Relationship
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "shopid")
 	private Shop shop;
 	
+	
+	//Constructor
 	public Item() {
 		
 	}
 	
+	//Constructor
 	public Item(String name, String manufacturer, int quantity, Shop shop) {
 		super();
 		this.name = name;
@@ -37,7 +41,7 @@ public class Item {
 		this.shop = shop;
 	}
 	
-	
+	//Getters and Setters
 	public long getId() {
 		return id;
 	}
